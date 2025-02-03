@@ -9,9 +9,21 @@ import SwiftUI
 
 @main
 struct FetchRecipesApp: App {
+    
+    init() {
+        registerDependencies()
+    }
+    
     var body: some Scene {
         WindowGroup {
             RecipeListView()
+                .preferredColorScheme(.light)
+                .environmentObject(RecipeListViewModel())
         }
     }
+    
+    private func registerDependencies() {
+        DependencyContainer.register(type: NetworkManagable.self, NetworkManager())
+    }
+    
 }
