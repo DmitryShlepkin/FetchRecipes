@@ -12,9 +12,12 @@ struct RecipeListView: View {
     @EnvironmentObject var viewModel: RecipeListViewModel
     
     var body: some View {
-        Text("\(viewModel.state)")
-        List(viewModel.recipeList, id: \.self) { item in
-            Text("1")
+        List(viewModel.recipeList, id: \.self.uuid) { recipe in
+            VStack(alignment: .leading, spacing: 4) {
+                Text("\(recipe.name ?? "")")
+                Text("\(recipe.cuisine ?? "")")
+                    .foregroundColor(Color.gray)
+            }
         }
         .refreshable {
             print("Pull to refresh")
