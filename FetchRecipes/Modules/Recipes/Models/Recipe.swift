@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Recipe {
+struct Recipes: Codable {
+    let recipes: [Recipe]?
+}
+ 
+struct Recipe: Codable, Hashable {
     
     let cuisine: String?
     let name: String?

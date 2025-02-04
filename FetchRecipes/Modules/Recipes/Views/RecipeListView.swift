@@ -8,18 +8,26 @@
 import SwiftUI
 
 struct RecipeListView: View {
+    
+    @EnvironmentObject var viewModel: RecipeListViewModel
+    
     var body: some View {
-        List {
+        Text("\(viewModel.state)")
+        List(viewModel.recipeList, id: \.self) { item in
             Text("1")
-            Text("2")
-            Text("3")
         }
         .refreshable {
             print("Pull to refresh")
+        }
+        .onAppear {
+            Task {
+                try await viewModel.fetchRecipeList()
+            }
         }
     }
 }
 
 #Preview {
     RecipeListView()
+        .environmentObject(RecipeListViewModel())
 }
