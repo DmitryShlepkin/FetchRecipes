@@ -24,6 +24,7 @@ struct FetchRecipesApp: App {
     
     private func registerDependencies() {
         DependencyContainer.register(type: NetworkManagable.self, NetworkManager())
+        DependencyContainer.register(type: ImageManagable.self, ImageManager())
     }
     
 }

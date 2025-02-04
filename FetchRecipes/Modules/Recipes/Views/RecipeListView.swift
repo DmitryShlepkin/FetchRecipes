@@ -13,10 +13,14 @@ struct RecipeListView: View {
     
     var body: some View {
         List(viewModel.recipeList, id: \.self.uuid) { recipe in
-            VStack(alignment: .leading, spacing: 4) {
-                Text("\(recipe.name ?? "")")
-                Text("\(recipe.cuisine ?? "")")
-                    .foregroundColor(Color.gray)
+            HStack {
+                DownloadableImageVew(url: recipe.photo_url_small)
+                    .frame(width: 48, height: 48)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("\(recipe.name ?? "")")
+                    Text("\(recipe.cuisine ?? "")")
+                        .foregroundColor(Color.gray)
+                }
             }
         }
         .refreshable {

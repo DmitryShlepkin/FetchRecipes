@@ -36,7 +36,10 @@ final class RecipeListViewModel: ObservableObject {
                 parameters: [:],
                 as: Recipes.self
             )
-            guard let recipeList = recipes?.recipes else { return }
+            guard let recipeList = recipes?.recipes else {
+                await update(state: .error)
+                return
+            }
             /// Check recipe list count and set state empty if 0
             if recipeList.count == 0 {
                 await update(state: .empty)
