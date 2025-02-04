@@ -24,7 +24,9 @@ struct RecipeListView: View {
             }
         }
         .refreshable {
-            print("Pull to refresh")
+            Task {
+                try await viewModel.fetchRecipeList()
+            }
         }
         .onAppear {
             Task {
