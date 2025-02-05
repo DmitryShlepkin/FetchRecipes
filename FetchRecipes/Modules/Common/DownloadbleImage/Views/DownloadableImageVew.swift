@@ -9,12 +9,12 @@ import SwiftUI
 
 struct DownloadableImageVew: View {
     
-    @StateObject private var loader: DownloadleImageViewModel
+    @StateObject private var loader: DownloadbleImageViewModel
     private let url: String?
     
     init(url: String?) {
         self.url = url
-        _loader = StateObject(wrappedValue: DownloadleImageViewModel())
+        _loader = StateObject(wrappedValue: DownloadbleImageViewModel())
     }
     
     var body: some View {

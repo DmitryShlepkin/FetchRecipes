@@ -28,6 +28,12 @@ final class RecipeListViewModel: ObservableObject {
     @Published var state: RecipeListState = .initial
     @Published var recipeList: [Recipe] = []
     
+    init() {
+        Task {
+            try await fetchRecipeList()
+        }
+    }
+    
     func fetchRecipeList() async throws {
         do {
             await update(state: .loading)
@@ -40,6 +46,9 @@ final class RecipeListViewModel: ObservableObject {
                 await update(state: .error)
                 return
             }
+            /// Note: Added sleep because service response too fast and to provide smooth user experience and make demo project looking good.
+            /// I strongly advise against using it in production.
+            try await Task.sleep(for: .seconds(1))
             /// Check recipe list count and set state empty if 0
             if recipeList.count == 0 {
                 await update(state: .empty)

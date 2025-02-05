@@ -1,5 +1,5 @@
 //
-//  DownloadleImageViewModel.swift
+//  DownloadbleImageViewModel.swift
 //  FetchRecipes
 //
 //  Created by Dmitry Shlepkin on 2/4/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DownloadleImageViewModel: ObservableObject {
+final class DownloadbleImageViewModel: ObservableObject {
     
     @Dependency private var imageManager: ImageManagable?
     

@@ -12,6 +12,12 @@ struct RecipeListView: View {
     @EnvironmentObject var viewModel: RecipeListViewModel
     
     var body: some View {
+        Text("Empty")
+            .visible(viewModel.state == .empty)
+        Text("Error")
+            .visible(viewModel.state == .error)
+        LoadingView()
+            .visible(viewModel.state == .loading)
         List(viewModel.recipeList, id: \.self.uuid) { recipe in
             HStack {
                 DownloadableImageVew(url: recipe.photo_url_small)
@@ -23,16 +29,12 @@ struct RecipeListView: View {
                 }
             }
         }
-        .refreshable {
-            Task {
-                try await viewModel.fetchRecipeList()
+            .visible(viewModel.state == .success)
+            .refreshable {
+                Task {
+                    try await viewModel.fetchRecipeList()
+                }
             }
-        }
-        .onAppear {
-            Task {
-                try await viewModel.fetchRecipeList()
-            }
-        }
     }
 }
 
