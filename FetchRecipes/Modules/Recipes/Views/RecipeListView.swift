@@ -12,9 +12,15 @@ struct RecipeListView: View {
     @EnvironmentObject var viewModel: RecipeListViewModel
     
     var body: some View {
-        Text("Empty")
+        MessageView(
+            title: "No result",
+            description: "Please, try again later."
+        )
             .visible(viewModel.state == .empty)
-        Text("Error")
+        MessageView(
+            title: "Error",
+            description: "Please, try again later."
+        )
             .visible(viewModel.state == .error)
         LoadingView()
             .visible(viewModel.state == .loading)
