@@ -10,9 +10,9 @@ import Foundation
 
 class NetworkManagerMock: NetworkManagable {
     
-    var response: [Recipe]
+    var response: Recipes
     
-    init(response: [Recipe]) {
+    init(response: Recipes) {
         self.response = response
     }
     
@@ -25,9 +25,9 @@ class NetworkManagerMock: NetworkManagable {
 
 class NetworkManagerWithErrorMock: NetworkManagable {
     
-    var response: [Recipe]
+    var response: Recipes
     
-    init(response: [Recipe]) {
+    init(response: Recipes) {
         self.response = response
     }
     

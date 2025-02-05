@@ -15,9 +15,9 @@ struct RecipeListViewModelTests {
     @Test("isRecipeListValid(valid)", arguments: [
         (RecipeListMock.validList, true),
         (RecipeListMock.invalidList, false),
-    ]) func testIsRecipeListValid_givenPayload_expectIsRecipeListValidToEqualExpectation(payload: [Recipe], expectation: Bool) {
+    ]) func testIsRecipeListValid_givenPayload_expectIsRecipeListValidToEqualExpectation(payload: Recipes, expectation: Bool) {
         let sut = RecipeListViewModel()
-        #expect(sut.isRecipeListValid(payload) == expectation)
+        #expect(sut.isRecipeListValid(payload.recipes!) == expectation)
     }
         
     @MainActor @Test("update(state:)") func testUpdateState_givenStateEqualToInitial_expectStateToBeSuccess () {
@@ -32,7 +32,7 @@ struct RecipeListViewModelTests {
         let sut = RecipeListViewModel()
         do {
             try await sut.fetchRecipeList()
-            try await Task.sleep(for: .seconds(2))
+            try await Task.sleep(for: .seconds(3))
         } catch {
             throw error
         }
@@ -45,7 +45,7 @@ struct RecipeListViewModelTests {
         let sut = RecipeListViewModel()
         do {
             try await sut.fetchRecipeList()
-            try await Task.sleep(for: .seconds(2))
+            try await Task.sleep(for: .seconds(3))
         } catch {
             throw error
         }
@@ -53,12 +53,12 @@ struct RecipeListViewModelTests {
     }
     
     @MainActor @Test("fetchRecipeList(empty)") func testFetchRecipeList_givenEmptySuccessResponse_expectStateToBeEmpty () async throws {
-        let networkManagerMock = NetworkManagerMock(response: [])
+        let networkManagerMock = NetworkManagerMock(response: .init(recipes: []))
         DependencyContainer.register(type: NetworkManagable.self, networkManagerMock, update: true)
         let sut = RecipeListViewModel()
         do {
             try await sut.fetchRecipeList()
-            try await Task.sleep(for: .seconds(2))
+            try await Task.sleep(for: .seconds(3))
         } catch {
             throw error
         }
@@ -66,12 +66,12 @@ struct RecipeListViewModelTests {
     }
     
     @MainActor @Test("fetchRecipeList(error)") func testFetchRecipeList_givenErrorResponse_expectStateToBeError () async throws {
-        let networkManagerMock = NetworkManagerWithErrorMock(response: [])
+        let networkManagerMock = NetworkManagerWithErrorMock(response: .init(recipes: []))
         DependencyContainer.register(type: NetworkManagable.self, networkManagerMock, update: true)
         let sut = RecipeListViewModel()
         do {
             try await sut.fetchRecipeList()
-            try await Task.sleep(for: .seconds(2))
+            try await Task.sleep(for: .seconds(3))
         } catch {
             #expect(sut.state == .error)
         }

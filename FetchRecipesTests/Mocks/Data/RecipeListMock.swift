@@ -10,18 +10,21 @@ import Foundation
 
 class RecipeListMock {
     
-    static let validList: [Recipe] = [
-        getValidRecipe(),
-        getValidRecipe(),
-        getValidRecipe()
-    ]
-    
-    
-    static let invalidList: [Recipe] = [
-        getValidRecipe(),
-        getInvalidRecipe(),
-        getValidRecipe()
-    ]
+    static var validList: Recipes {
+        Recipes(recipes: [
+            getValidRecipe(),
+            getValidRecipe(),
+            getValidRecipe()
+        ])
+    }
+
+    static var invalidList: Recipes {
+        Recipes(recipes: [
+            getValidRecipe(),
+            getInvalidRecipe(),
+            getValidRecipe()
+        ])
+    }
     
     private static func getValidRecipe() -> Recipe {
         .init(
