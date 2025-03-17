@@ -22,7 +22,6 @@ class NetworkManagerMock: NetworkManagable {
     
 }
 
-
 class NetworkManagerWithErrorMock: NetworkManagable {
     
     var response: Recipes

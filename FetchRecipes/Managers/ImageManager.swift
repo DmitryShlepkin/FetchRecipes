@@ -39,6 +39,7 @@ extension ImageManager {
         } else {
             if let image = try await downloadImageFrom(url: url) {
                 saveImageToDisk(image: image, named: fileName)
+                return image
             }
         }
         return nil
