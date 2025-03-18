@@ -29,4 +29,8 @@ struct Recipe: Codable, Hashable {
         return true
     }
     
+    var accessibilityLabel: String {
+        return "\(name ?? "Recipe") by \(cuisine ?? "Unknown")"
+    }
+    
 }

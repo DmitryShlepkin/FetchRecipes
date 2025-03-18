@@ -10,12 +10,15 @@ import SwiftUI
 struct LoadingView: View {
     
     @State var isLoading: Bool = false
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     
     var body: some View {
         ZStack {
             Text("Loading")
                 .font(.system(.body, design: .rounded))
+                .dynamicTypeSize(...dynamicTypeSize)
                 .offset(x: 0, y: -15)
+                .padding(.bottom, 16)
             RoundedRectangle(cornerRadius: 4)
                 .stroke(Color(.systemGray5), lineWidth: 4)
                 .frame(width: 150, height: 4)

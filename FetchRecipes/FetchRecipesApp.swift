@@ -17,14 +17,12 @@ struct FetchRecipesApp: App {
     var body: some Scene {
         WindowGroup {
             RecipeListView()
-                .preferredColorScheme(.light)
-                .environmentObject(RecipeListViewModel())
         }
     }
     
     private func registerDependencies() {
-        DependencyContainer.register(type: NetworkManagable.self, NetworkManager())
-        DependencyContainer.register(type: ImageManagable.self, ImageManager())
+        DependencyManager.register(type: NetworkManagable.self, NetworkManager())
+        DependencyManager.register(type: ImageManagable.self, ImageManager())
     }
     
 }

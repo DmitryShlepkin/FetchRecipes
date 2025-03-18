@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MessageView: View {
     
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
+    
     let title: String
     let description: String
     
@@ -16,9 +18,13 @@ struct MessageView: View {
         VStack {
             Text(title)
                 .font(.system(.body, design: .rounded))
+                .dynamicTypeSize(...dynamicTypeSize)
+                .accessibilityLabel(title)
             Text(description)
                 .font(.system(.body, design: .rounded))
                 .foregroundColor(Color.gray)
+                .dynamicTypeSize(...dynamicTypeSize)
+                .accessibilityLabel(description)
         }
     }
     

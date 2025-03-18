@@ -1,5 +1,5 @@
 //
-//  DependencyContainer.swift
+//  DependencyManager.swift
 //  FetchRecipes
 //
 //  Created by Dmitry Shlepkin on 2/3/25.
@@ -10,7 +10,7 @@ protocol DependencyManaging {
     static func resolve<T>(_ type: T.Type) -> T?
 }
 
-actor DependencyContainer: DependencyManaging {
+actor DependencyManager: DependencyManaging {
             
     private static var services: [ObjectIdentifier: () -> Any] = [:]
     private static var resolved: [ObjectIdentifier: Any] = [:]
@@ -44,7 +44,7 @@ struct Dependency<T> {
     var service: T?
 
     init() {
-        guard let service = DependencyContainer.resolve(T.self) else {
+        guard let service = DependencyManager.resolve(T.self) else {
             let serviceName = String(describing: T.self)
             fatalError("No service of type \(serviceName) registered!")
         }
